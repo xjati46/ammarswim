@@ -1,0 +1,158 @@
+{% extends "admin_app/base.html" %}
+{% load static %}
+{% load l10n %}
+
+{% block content %}
+<h1>Data Latihan</h1>
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-code"></i> Kode Latihan</span>
+      <h5><strong>{{ order.id }}/{{ order.student.nama_panggilan }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="fas fa-user"></i> Nama Lengkap</span>
+      <h5><strong>{{ order.student.nama_lengkap }}</strong></h5>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-shopping-cart"></i> Paket Latihan</span>
+      <h5><strong>{{ order.product }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="fas fa-money-bill"></i> Nilai Transaksi</span>
+      <h5><strong>Rp {{ order.bill|localize }}</strong></h5>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-calendar-check"></i> Tanggal Transaksi</span>
+      <h5><strong>{{ order.tanggal_transaksi }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="fas fa-calendar-times"></i> Tanggal Expired</span>
+      <h5>
+        <strong>
+          {{ order.tanggal_expired }} |
+        {% if order.is_expired == 'EXPIRED' %}
+          <span class='text-danger'>{{ order.is_expired }}</span>
+        {% else %}
+          <span class='text-success'>{{ order.is_expired }}</span>
+        {% endif %}
+        </strong>
+      </h5>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="container">
+  <div class="row">
+    {% if order.product.jumlah_pertemuan == 1 %}
+    <div class="col-4">
+      <table class='table table-striped'>
+        <thead>
+          <tr class='text-center'>
+            <th>Pertemuan</th>
+            <th>Tanggal</th>
+          </tr>
+        </thead>
+        <tr class='text-center'>
+          <td class='text-center'>1</td>
+          <td>{{ order.p1 }}</td>
+        </tr>
+      </table>
+    </div>
+    {% elif order.product.jumlah_pertemuan == 4 %}
+    <div class="col-4">
+      <table class='table table-striped'>
+        <thead>
+          <tr class='text-center'>
+            <th>Pertemuan</th>
+            <th>Tanggal</th>
+          </tr>
+        </thead>
+        <tr class='text-center'>
+          <td>1</td>
+          <td>{{ order.p1 }}</td>
+        </tr>
+        <tr class='text-center'>
+          <td>2</td>
+          <td>{{ order.p2 }}</td>
+        </tr>
+        <tr class='text-center'>
+          <td>3</td>
+          <td>{{ order.p3 }}</td>
+        </tr>
+        <tr class='text-center'>
+          <td>4</td>
+          <td>{{ order.p4 }}</td>
+        </tr>
+      </table>
+    </div>
+    {% else %}
+    <div class="col-4">
+      <table class='table table-striped'>
+        <thead>
+          <tr class='text-center'>
+            <th>Pertemuan</th>
+            <th>Tanggal</th>
+          </tr>
+        </thead>
+        <tr class='text-center'>
+          <td>1</td>
+          <td>{{ order.p1 }}</td>
+        </tr>
+        <tr class='text-center'>
+          <td>2</td>
+          <td>{{ order.p2 }}</td>
+        </tr>
+        <tr class='text-center'>
+          <td>3</td>
+          <td>{{ order.p3 }}</td>
+        </tr>
+        <tr class='text-center'>
+          <td>4</td>
+          <td>{{ order.p4 }}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-4">
+      <table class='table table-striped' >
+        <thead>
+          <tr class='text-center'>
+            <th>Pertemuan</th>
+            <th>Tanggal</th>
+          </tr>
+        </thead>
+        <tr class='text-center'>
+          <td>5</td>
+          <td>{{ order.p5 }}</td>
+        </tr>
+        <tr class='text-center'>
+          <td>6</td>
+          <td>{{ order.p6 }}</td>
+        </tr>
+        <tr class='text-center'>
+          <td>7</td>
+          <td>{{ order.p7 }}</td>
+        </tr>
+        <tr class='text-center'>
+          <td>8</td>
+          <td>{{ order.p8 }}</td>
+        </tr>
+      </table>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+
+{% endblock content %}

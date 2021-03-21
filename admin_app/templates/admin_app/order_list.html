@@ -1,0 +1,49 @@
+{% extends "admin_app/base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Daftar Latihan</h1>
+<hr>
+<button class='btn btn-primary mb-3' onclick="document.location='{% url 'admin-app:order-dnurs-create' %}'">Tambah</button>
+<table class='table'>
+  <thead>
+    <th>No.</th>
+    <th>Kode</th>
+    <th>Nama</th>
+    <th>Paket</th>
+    <th>Masa Berlaku</th>
+    <th>Jumlah Latihan</th>
+    <th>Pelatih</th>
+  </thead>
+  {% for order in order_dnurs_list %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td><a href="{% url 'admin-app:order-dnurs-detail' order.pk %}"><strong>{{ order.id }}/{{ order.student.nama_panggilan }}<strong></a></td>
+      <td>{{ order.student.nama_lengkap }}</td>
+      <td>{{ order.product }}</td>
+      <td>
+        {{ order.tanggal_transaksi }} - {{ order.tanggal_expired }} |
+        <strong>
+        {% if order.is_expired == 'EXPIRED' %}
+          <span class='text-danger'>{{ order.is_expired }}</span>
+        {% else %}
+          <span class='text-success'>{{ order.is_expired }}</span>
+        {% endif %}
+        </strong>
+      </td>
+      <td>{{ order.p_total }} / {{ order.product.jumlah_pertemuan }} |
+        <strong>
+          {% if order.p_status == 'SELESAI' %}
+            <span class='text-danger'>{{ order.p_status }}</span>
+          {% else %}
+            <span class='text-success'>{{ order.p_status }}</span>
+          {% endif %}
+        </strong>
+      </td>
+      <td>{{ order.coach }}</td>
+    </tr>
+
+  {% endfor %}
+</table>
+
+{% endblock content %}

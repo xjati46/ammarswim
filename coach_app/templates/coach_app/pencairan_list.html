@@ -1,0 +1,113 @@
+{% extends "coach_app/base.html" %}
+{% load l10n %}
+
+{% block content %}
+<h1>Daftar Pencairan</h1>
+<table class='table'>
+  <thead>
+    <th>No.</th>
+    <th>Kode</th>
+    <th>Nama</th>
+    <th>Paket</th>
+    <th>Honor per Sesi</th>
+    <th>Latihan Aktif</th>
+    <th>Tanggal Latihan</th>
+    <th>Jumlah Pencairan</th>
+  </thead>
+  {% for order in coach_pencairan_list %}
+    {% if order.margin_p_c > 0 %}
+
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td><a href="{% url 'coach-app:coach-order-detail' order.pk %}"><strong>{{ order.id }}/{{ order.student.nama_panggilan }}<strong></a></td>
+        <td>{{ order.student.nama_lengkap }}</td>
+        <td>{{ order.product }}</td>
+        <td>
+          <span>
+          <!-- {% if order.student.afiliasi == 'Dnurs' %}
+            Rp {{ order.coach_share_dnurs|localize }}
+            {% if order.diskon %}
+              {% widthratio order.diskon 1 100 as disc %}
+              <strong><sup class='text-warning'>*Promo {{disc}}%</sup></strong>
+            {% endif %}
+          {% else %}
+            Rp {{ order.coach_share|localize }}
+            {% if order.diskon %}
+              {% widthratio order.diskon 1 100 as disc %}
+              <strong><sup class='text-warning'>*Promo {{disc}}%</sup></strong>
+            {% endif %}
+          {% endif %} -->
+
+              Rp {{ order.product.fee_pelatih|localize }}
+              {% if order.diskon %}
+                {% widthratio order.diskon 1 100 as disc %}
+                <strong><sup class='text-warning'>*Promo {{disc}}%</sup></strong>
+              {% endif %}
+
+          </span>
+        </td>
+        <td>{{ order.margin_p_c }}</td>
+        <td>
+          {% if order.p1 and order.p1_c %}
+          {% else %}
+          {{ order.p1 }} <br>
+          {% endif %}
+
+          {% if order.product.jumlah_pertemuan >= 4 %}
+
+            {% if order.p2 and order.p2_c %}
+            {% else %}
+            {{ order.p2 }} <br>
+            {% endif %}
+
+            {% if order.p3 and order.p3_c %}
+            {% else %}
+            {{ order.p3 }} <br>
+            {% endif %}
+
+            {% if order.p4 and order.p4_c %}
+            {% else %}
+            {{ order.p4 }} <br>
+            {% endif %}
+
+            {% if order.product.jumlah_pertemuan == 8 %}
+
+              {% if order.p5 and order.p5_c %}
+              {% else %}
+              {{ order.p5 }} <br>
+              {% endif %}
+
+              {% if order.p6 and order.p6_c %}
+              {% else %}
+              {{ order.p6 }} <br>
+              {% endif %}
+
+              {% if order.p7 and order.p7_c %}
+              {% else %}
+              {{ order.p7 }} <br>
+              {% endif %}
+
+              {% if order.p8 and order.p8_c %}
+              {% else %}
+              {{ order.p8 }} <br>
+              {% endif %}
+
+            {% endif %}
+
+          {% endif %}
+
+        </td>
+        <td>
+          {% if order.student.afiliasi == 'Dnurs' %}
+            Rp {{ order.income_coach_actual_dnurs|localize }}
+          {% else %}
+            Rp {{ order.income_coach_actual_normal|localize }}
+          {% endif %}
+        </td>
+      </tr>
+
+    {% endif %}
+  {% endfor %}
+</table>
+
+{% endblock content %}

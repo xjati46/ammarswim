@@ -1,0 +1,105 @@
+{% extends "main_app/base.html" %}
+{% block content %}
+<div class="container">
+  <div class="jumbotron">
+    <h1>Order Filter</h1>
+    <hr>
+    <form method="get">
+      {{ filter.form.as_p }}
+      <div class="row">
+        <div class="col-1">
+          <button class='btn btn-primary' type="submit">Search</button>
+        </div>
+        <div class="col-1">
+          <button class='btn btn-warning' onclick='href="#"'>Reset</button>
+        </div>
+      </div>
+
+    </form>
+    <br>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>Kode Order</th>
+          <th>Nama Lengkap</th>
+          <th>Pelatih</th>
+          <th>Produk</th>
+          <th>Latihan - Afirmasi</th>
+          <th>Jumlah Konfirmasi</th>
+          <th>Tanggal Konfirmasi</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      {% for order in filter.qs %}
+      <tr>
+        <td>{{ order }}</td>
+        <td>{{ order.student.nama_lengkap }}</td>
+        <td>{{ order.coach }}</td>
+        <td>{{ order.product }}</td>
+        <td>{{ order.p_total }} - {{ order.p_a_total }}</td>
+        <td>{{ order.margin_p_a }}</td>
+        {% if order.margin_p_a > 0 %}
+        <td>
+
+          {% if order.p1 and order.p1_a %}
+          {% else %}
+          {{ order.p1 }} <br>
+          {% endif %}
+
+          {% if order.product.jumlah_pertemuan >= 4 %}
+
+            {% if order.p2 and order.p2_a %}
+            {% else %}
+            {{ order.p2 }} <br>
+            {% endif %}
+
+            {% if order.p3 and order.p3_a %}
+            {% else %}
+            {{ order.p3 }} <br>
+            {% endif %}
+
+            {% if order.p4 and order.p4_a %}
+            {% else %}
+            {{ order.p4 }} <br>
+            {% endif %}
+
+            {% if order.product.jumlah_pertemuan == 8 %}
+
+              {% if order.p5 and order.p5_a %}
+              {% else %}
+              {{ order.p5 }} <br>
+              {% endif %}
+
+              {% if order.p6 and order.p6_a %}
+              {% else %}
+              {{ order.p6 }} <br>
+              {% endif %}
+
+              {% if order.p7 and order.p7_a %}
+              {% else %}
+              {{ order.p7 }} <br>
+              {% endif %}
+
+              {% if order.p8 and order.p8_a %}
+              {% else %}
+              {{ order.p8 }} <br>
+              {% endif %}
+
+            {% endif %}
+
+          {% endif %}
+
+
+        </td>
+        {% else %}
+        <td></td>
+        {% endif %}
+        <td><span class='text-danger'>{{ order.p_status}}<br>{{ order.is_expired }}</span></td>
+      </tr>
+
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+{% endblock content %}

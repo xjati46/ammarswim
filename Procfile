@@ -1,0 +1,1 @@
+web: gunicorn maestro_project.wsgi --log-file -

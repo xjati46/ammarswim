@@ -1,0 +1,86 @@
+{% extends "student_app/base.html" %}
+{% load l10n %}
+
+{% block content %}
+<h1>Arsip</h1>
+<table class='table'>
+  <thead>
+    <th>No.</th>
+    <th>Kode</th>
+    <th>Paket</th>
+    <th>Biaya</th>
+    <th>Masa Berlaku</th>
+    <th>Jumlah Latihan</th>
+    <th>Rincian Latihan</th>
+  </thead>
+  {% for arsip in student_arsip_list %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ arsip.id }}/{{ arsip.student.nama_panggilan }}</td>
+      <td>{{ arsip.product }}</td>
+      <td>
+        Rp {{ arsip.bill|localize }}
+        {% if arsip.diskon %}
+          {% widthratio arsip.diskon 1 100 as disc %}
+          <strong><sup class='text-warning'>*Promo {{disc}}%</sup></strong>
+        {% endif %}
+      </td>
+      <td>
+        {{ arsip.tanggal_transaksi }} - {{ arsip.tanggal_expired }} |
+        <strong>
+        {% if arsip.is_expired == 'EXPIRED' %}
+          <span class='text-danger'>{{ arsip.is_expired }}</span>
+        {% else %}
+          <span class='text-success'>{{ arsip.is_expired }}</span>
+        {% endif %}
+        </strong>
+      </td>
+      <td>{{ arsip.p_total }} / {{ arsip.product.jumlah_pertemuan }} |
+        <strong>
+          {% if arsip.p_status == 'SELESAI' %}
+            <span class='text-danger'>{{ arsip.p_status }}</span>
+          {% else %}
+            <span class='text-success'>{{ arsip.p_status }}</span>
+          {% endif %}
+        </strong>
+      </td>
+
+      <td>
+        <div class="dropdown no-arrow">
+
+          <a class="dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-calendar-alt"></i>
+          </a>
+
+          <div class="dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+            <div class="mx-3">
+              <div>
+                <p>1: {{ arsip.p1 }}</p>
+                {% if arsip.product.jumlah_pertemuan == 4 %}
+                  <p>2: {{ arsip.p2 }}</p>
+                  <p>3: {{ arsip.p3 }}</p>
+                  <p>4: {{ arsip.p4 }}</p>
+                {% elif arsip.product.jumlah_pertemuan == 8 %}
+                  <p>2: {{ arsip.p2 }}</p>
+                  <p>3: {{ arsip.p3 }}</p>
+                  <p>4: {{ arsip.p4 }}</p>
+                  <p>5: {{ arsip.p5 }}</p>
+                  <p>6: {{ arsip.p6 }}</p>
+                  <p>7: {{ arsip.p7 }}</p>
+                  <p>8: {{ arsip.p8 }}</p>
+                {% endif %}
+
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </td>
+
+    </tr>
+
+  {% endfor %}
+</table>
+
+{% endblock content %}

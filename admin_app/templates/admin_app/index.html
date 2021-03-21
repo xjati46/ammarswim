@@ -1,0 +1,24 @@
+{% extends "admin_app/base.html" %}
+{% load static %}
+{% block content %}
+<h1>Selamat datang, <strong>{{ user.get_username }}</strong>!</h1>
+<br>
+<h4>Pengumuman dan Berita Terbaru</h4>
+<table class='table'>
+  <thead>
+    <th>No.</th>
+    <th>Tanggal</th>
+    <th>Judul</th>
+    <th>Konten</th>
+  </thead>
+{% for news in news_list %}
+  <tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ news.waktu_post }}</td>
+    <td>{{ news.judul }}</td>
+    <td>{{ news.konten }}</td>
+  </tr>
+{% endfor %}
+</table>
+
+{% endblock content %}

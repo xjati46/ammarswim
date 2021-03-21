@@ -1,0 +1,30 @@
+{% extends "admin_app/base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Daftar Murid</h1>
+<hr>
+<button class='btn btn-primary mb-3' onclick="document.location='{% url 'admin-app:student-dnurs-create' %}'">Tambah</button>
+<table class='table'>
+  <thead>
+    <th>No.</th>
+    <th>Nama</th>
+    <th>Jenis Kelamin</th>
+    <th>Usia</th>
+    <th>Ponsel</th>
+    <th>Email</th>
+  </thead>
+  {% for student in student_dnurs_list %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td><a href="{% url 'admin-app:student-dnurs-detail' student.pk %}"><strong>{{ student.nama_lengkap }} ({{ student.nama_panggilan }})<strong></a></td>
+      <td>{{ student.jenis_kelamin }}</td>
+      <td>{{ student.usia }} tahun</td>
+      <td>{{ student.nomor_ponsel }}</td>
+      <td>{{ student.alamat_email }}</td>
+    </tr>
+
+  {% endfor %}
+</table>
+
+{% endblock content %}

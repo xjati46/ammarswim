@@ -1,0 +1,357 @@
+{% extends "coach_app/base.html" %}
+
+{% block content %}
+<h1>Buat Rapor</h1>
+<hr>
+<div class="container">
+  <form method="post">
+  {% csrf_token %}
+    <table>
+      {{ form.non_field_errors }}
+
+      <div class="fieldWrapper">
+        {{ form.order.errors }}
+        <div class="row">
+          <div class="col-4">
+            <h3><label for="{{ form.order.id_for_label }}">KODE LATIHAN</label></h3>
+          </div>
+          <div class="col-2">
+            {{ form.order }}
+          </div>
+        </div>
+      </div>
+      <hr>
+
+      <div class="row">
+        <div class="col">
+          <h3>PENGENALAN AIR</h3>
+
+          <div class="fieldWrapper">
+            {{ form.pengenalan_air_1.errors }}
+            <div class="row">
+              <div class="col-4">
+                <label for="{{ form.pengenalan_air_1.id_for_label }}">Pengaturan Nafas</label>
+              </div>
+              <div class="col-2">
+                <input type="number" name="pengenalan_air_1" id="id_pengenalan_air_1" data-slider-value="0" data-slider-id='ex1Slider'>
+              </div>
+            </div>
+          </div>
+
+          <div class="fieldWrapper">
+            <div class="row">
+              <div class="col-4">
+                <label for="{{ form.pengenalan_air_2.id_for_label }}">Mengapung Telungkup dan Telentang</label>
+              </div>
+              <div class="col-2">
+                <input type="number" name="pengenalan_air_2" id="id_pengenalan_air_2" data-slider-value="0" data-slider-id='ex1Slider'>
+              </div>
+            </div>
+            {{ form.pengenalan_air_2.errors }}
+          </div>
+
+          <div class="fieldWrapper">
+            <div class="row">
+              <div class="col-4">
+                <label for="{{ form.pengenalan_air_3.id_for_label }}">Teknik Meluncur</label>
+              </div>
+              <div class="col-2">
+                <input type="number" name="pengenalan_air_3" id="id_pengenalan_air_3" data-slider-value="0" data-slider-id='ex1Slider'>
+              </div>
+            </div>
+            {{ form.pengenalan_air_3.errors }}
+          </div>
+
+        </div>
+
+        <div class="col">
+          <h3>KOMENTAR</h3>
+
+          <div class="fieldWrapper">
+            {{ form.komentar.errors }}
+            <textarea name="komentar" cols="40" rows="6" maxlength="200" id="id_komentar"></textarea>
+          </div>
+
+        </div>
+
+      </div>
+      <hr>
+
+      <div class="row">
+
+        <div class="col">
+          <h3>GAYA BEBAS</h3>
+          <div class="fieldWrapper">
+            {{ form.gaya_bebas_1.errors }}
+            <div class="row">
+              <div class="col-4">
+                <label for="{{ form.gaya_bebas_1.id_for_label }}">Teknik Kaki dan Pengambilan Nafas</label>
+              </div>
+              <div class="col-2">
+                <input type="number" name="gaya_bebas_1" id="id_gaya_bebas_1" data-slider-value="0" data-slider-id='ex1Slider'>
+              </div>
+            </div>
+          </div>
+
+          <div class="fieldWrapper">
+            <div class="row">
+              <div class="col-4">
+                <label for="{{ form.gaya_bebas_2.id_for_label }}">Teknik Tangan dan Pengambilan Nafas</label>
+              </div>
+              <div class="col-2">
+                <input type="number" name="gaya_bebas_2" id="id_gaya_bebas_2" data-slider-value="0" data-slider-id='ex1Slider'>
+              </div>
+            </div>
+            {{ form.gaya_bebas_2.errors }}
+          </div>
+
+          <div class="fieldWrapper">
+            <div class="row">
+              <div class="col-4">
+                <label for="{{ form.gaya_bebas_3.id_for_label }}">Koordinasi Kaki, Tangan, Nafas</label>
+              </div>
+              <div class="col-2">
+                <input type="number" name="gaya_bebas_3" id="id_gaya_bebas_3" data-slider-value="0" data-slider-id='ex1Slider'>
+              </div>
+            </div>
+            {{ form.gaya_bebas_3.errors }}
+          </div>
+        </div>
+
+        <div class="col">
+          <h3>GAYA DADA</h3>
+
+          <div class="fieldWrapper">
+            {{ form.gaya_dada_1.errors }}
+            <div class="row">
+              <div class="col-4">
+                <label for="{{ form.gaya_dada_1.id_for_label }}">Teknik Kaki dan Pengambilan Nafas</label>
+              </div>
+              <div class="col-2">
+                <input type="number" name="gaya_dada_1" id="id_gaya_dada_1" data-slider-value="0" data-slider-id='ex1Slider'>
+              </div>
+            </div>
+          </div>
+
+          <div class="fieldWrapper">
+            <div class="row">
+              <div class="col-4">
+                <label for="{{ form.gaya_dada_2.id_for_label }}">Teknik Tangan dan Pengambilan Nafas</label>
+              </div>
+              <div class="col-2">
+                <input type="number" name="gaya_dada_2" id="id_gaya_dada_2" data-slider-value="0" data-slider-id='ex1Slider'>
+              </div>
+            </div>
+            {{ form.gaya_dada_2.errors }}
+          </div>
+
+          <div class="fieldWrapper">
+            <div class="row">
+              <div class="col-4">
+                <label for="{{ form.gaya_dada_3.id_for_label }}">Koordinasi Kaki, Tangan, Nafas</label>
+              </div>
+              <div class="col-2">
+                <input type="number" name="gaya_dada_3" id="id_gaya_dada_3" data-slider-value="0" data-slider-id='ex1Slider'>
+              </div>
+            </div>
+            {{ form.gaya_dada_3.errors }}
+          </div>
+
+        </div>
+      </div>
+      <hr>
+
+      <div class="row">
+        <div class="col">
+          <h3>GAYA PUNGGUNG</h3>
+
+          <div class="fieldWrapper">
+            {{ form.gaya_punggung_1.errors }}
+            <div class="row">
+              <div class="col-4">
+                <label for="{{ form.gaya_punggung_1.id_for_label }}">Teknik Kaki dan Pengambilan Nafas</label>
+              </div>
+              <div class="col-2">
+                <input type="number" name="gaya_punggung_1" id="id_gaya_punggung_1" data-slider-value="0" data-slider-id='ex1Slider'>
+              </div>
+            </div>
+          </div>
+
+          <div class="fieldWrapper">
+            <div class="row">
+              <div class="col-4">
+                <label for="{{ form.gaya_punggung_2.id_for_label }}">Teknik Tangan dan Pengambilan Nafas</label>
+              </div>
+              <div class="col-2">
+                <input type="number" name="gaya_punggung_2" id="id_gaya_punggung_2" data-slider-value="0" data-slider-id='ex1Slider'>
+              </div>
+            </div>
+            {{ form.gaya_punggung_2.errors }}
+          </div>
+
+          <div class="fieldWrapper">
+            <div class="row">
+              <div class="col-4">
+                <label for="{{ form.gaya_punggung_3.id_for_label }}">Koordinasi Kaki, Tangan, Nafas</label>
+              </div>
+              <div class="col-2">
+                <input type="number" name="gaya_punggung_3" id="id_gaya_punggung_3" data-slider-value="0" data-slider-id='ex1Slider'>
+              </div>
+            </div>
+            {{ form.gaya_punggung_3.errors }}
+          </div>
+
+        </div>
+        <div class="col">
+          <h3>GAYA KUPU-KUPU</h3>
+
+          <div class="fieldWrapper">
+            {{ form.gaya_kupu_1.errors }}
+            <div class="row">
+              <div class="col-4">
+                <label for="{{ form.gaya_kupu_1.id_for_label }}">Teknik Kaki dan Pengambilan Nafas</label>
+              </div>
+              <div class="col-2">
+                <input type="number" name="gaya_kupu_1" id="id_gaya_kupu_1" data-slider-value="0" data-slider-id='ex1Slider'>
+              </div>
+            </div>
+          </div>
+
+          <div class="fieldWrapper">
+            <div class="row">
+              <div class="col-4">
+                <label for="{{ form.gaya_kupu_2.id_for_label }}">Teknik Tangan dan Pengambilan Nafas</label>
+              </div>
+              <div class="col-2">
+                <input type="number" name="gaya_kupu_2" id="id_gaya_kupu_2" data-slider-value="0" data-slider-id='ex1Slider'>
+              </div>
+            </div>
+            {{ form.gaya_kupu_2.errors }}
+          </div>
+
+          <div class="fieldWrapper">
+            <div class="row">
+              <div class="col-4">
+                <label for="{{ form.gaya_kupu_3.id_for_label }}">Koordinasi Kaki, Tangan, Nafas</label>
+              </div>
+              <div class="col-2">
+                <input type="number" name="gaya_kupu_3" id="id_gaya_kupu_3" data-slider-value="0" data-slider-id='ex1Slider'>
+              </div>
+            </div>
+            {{ form.gaya_kupu_3.errors }}
+          </div>
+
+        </div>
+      </div>
+
+
+    </table>
+
+    <br>
+    <input type="submit" value="Simpan" class='btn btn-primary'>
+    <a class='ml-3' href="{% url 'coach-app:rapor-list' %}">Kembali</a>
+
+  </form>
+</div>
+
+<style>
+  #ex1Slider .slider-selection {
+  background: #BABABA;
+  }
+</style>
+
+<script>
+  // With JQuery
+  $('#id_pengenalan_air_1').slider({
+  	formatter: function(value) {
+  		return 'Nilai: ' + value;
+  	}
+  });
+
+  $('#id_pengenalan_air_2').slider({
+  	formatter: function(value) {
+  		return 'Nilai: ' + value;
+  	}
+  });
+
+  $('#id_pengenalan_air_3').slider({
+  	formatter: function(value) {
+  		return 'Nilai: ' + value;
+  	}
+  });
+
+  $('#id_gaya_bebas_1').slider({
+  	formatter: function(value) {
+  		return 'Nilai: ' + value;
+  	}
+  });
+
+  $('#id_gaya_bebas_2').slider({
+  	formatter: function(value) {
+  		return 'Nilai: ' + value;
+  	}
+  });
+
+  $('#id_gaya_bebas_3').slider({
+  	formatter: function(value) {
+  		return 'Nilai: ' + value;
+  	}
+  });
+
+  $('#id_gaya_dada_1').slider({
+  	formatter: function(value) {
+  		return 'Nilai: ' + value;
+  	}
+  });
+
+  $('#id_gaya_dada_2').slider({
+  	formatter: function(value) {
+  		return 'Nilai: ' + value;
+  	}
+  });
+
+  $('#id_gaya_dada_3').slider({
+  	formatter: function(value) {
+  		return 'Nilai: ' + value;
+  	}
+  });
+
+  $('#id_gaya_punggung_1').slider({
+  	formatter: function(value) {
+  		return 'Nilai: ' + value;
+  	}
+  });
+
+  $('#id_gaya_punggung_2').slider({
+  	formatter: function(value) {
+  		return 'Nilai: ' + value;
+  	}
+  });
+
+  $('#id_gaya_punggung_3').slider({
+  	formatter: function(value) {
+  		return 'Nilai: ' + value;
+  	}
+  });
+
+  $('#id_gaya_kupu_1').slider({
+  	formatter: function(value) {
+  		return 'Nilai: ' + value;
+  	}
+  });
+
+  $('#id_gaya_kupu_2').slider({
+  	formatter: function(value) {
+  		return 'Nilai: ' + value;
+  	}
+  });
+
+  $('#id_gaya_kupu_3').slider({
+  	formatter: function(value) {
+  		return 'Nilai: ' + value;
+  	}
+  });
+
+</script>
+
+{% endblock content %}

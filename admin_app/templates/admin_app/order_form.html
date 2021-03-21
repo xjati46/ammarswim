@@ -1,0 +1,26 @@
+{% extends "admin_app/base.html" %}
+
+{% block content %}
+<h1>Buat Order Baru</h1>
+<hr>
+<div class="container">
+  <form method="post" class='user'>
+    {% csrf_token %}
+
+    <table>
+      {{form}}
+    </table>
+
+
+    <br>
+    <input type="submit" value="Simpan" class='btn btn-primary'>
+    <a class='ml-3' href="{% url 'admin-app:order-dnurs-list' %}">Kembali</a>
+  </form>
+  <hr>
+  <em>
+  <p>Format penanggalan: "tahun-bulan-tanggal" (Contoh "2000-01-31")</p>
+  <p>Contoh diskon: "0,15" (diskon 15 %)</p>
+  </em>
+</div>
+
+{% endblock content %}

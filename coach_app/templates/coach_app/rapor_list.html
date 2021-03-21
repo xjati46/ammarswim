@@ -1,0 +1,110 @@
+{% extends "coach_app/base.html" %}
+
+{% block content %}
+<h1>Daftar Rapor</h1>
+<hr>
+<button class='btn btn-primary mb-3' onclick="document.location='{% url 'coach-app:rapor-create' %}'">Tambah</button>
+<table class='table'>
+  <thead>
+    <th>No.</th>
+    <th>Tanggal Dibuat</th>
+    <th>Kode Order</th>
+    <th>Nama Lengkap</th>
+    <th>Skor Pengenalan Air</th>
+    <th>Skor Gaya Bebas</th>
+    <th>Skor Gaya Punggung</th>
+    <th>Skor Gaya Dada</th>
+    <th>Skor Gaya Kupu-Kupu</th>
+    <th>Komentar</th>
+  </thead>
+  {% for rapor in rapor_list %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ rapor.waktu_post }}</td>
+      <td>{{ rapor.order }}</td>
+      <td>{{ rapor.order.student.nama_lengkap }}</td>
+
+      {% if rapor.skor_pengenalan_air >= 8 %}
+        <td class='text-success'>{{ rapor.skor_pengenalan_air }}</td>
+      {% elif rapor.skor_pengenalan_air >= 5 %}
+        <td class='text-warning'>{{ rapor.skor_pengenalan_air }}</td>
+      {% elif rapor.skor_pengenalan_air < 5 %}
+        <td class='text-danger'>{{ rapor.skor_pengenalan_air }}</td>
+      {% else %}
+        <td>{{ rapor.skor_pengenalan_air }}</td>
+      {% endif %}
+
+      {% if rapor.skor_gaya_bebas >= 8 %}
+        <td class='text-success'>{{ rapor.skor_gaya_bebas }}</td>
+      {% elif rapor.skor_gaya_bebas >= 5 %}
+        <td class='text-warning'>{{ rapor.skor_gaya_bebas }}</td>
+      {% elif rapor.skor_gaya_bebas < 5 %}
+        <td class='text-danger'>{{ rapor.skor_gaya_bebas }}</td>
+      {% else %}
+        <td>{{ rapor.skor_gaya_bebas }}</td>
+      {% endif %}
+
+      {% if rapor.skor_gaya_punggung >= 8 %}
+        <td class='text-success'>{{ rapor.skor_gaya_punggung }}</td>
+      {% elif rapor.skor_gaya_punggung >= 5 %}
+        <td class='text-warning'>{{ rapor.skor_gaya_punggung }}</td>
+      {% elif rapor.skor_gaya_punggung < 5 %}
+        <td class='text-danger'>{{ rapor.skor_gaya_punggung }}</td>
+      {% else %}
+        <td>{{ rapor.skor_gaya_punggung }}</td>
+      {% endif %}
+
+      {% if rapor.skor_gaya_dada >= 8 %}
+        <td class='text-success'>{{ rapor.skor_gaya_dada }}</td>
+      {% elif rapor.skor_gaya_dada >= 5 %}
+        <td class='text-warning'>{{ rapor.skor_gaya_dada }}</td>
+      {% elif rapor.skor_gaya_dada < 5 %}
+        <td class='text-danger'>{{ rapor.skor_gaya_dada }}</td>
+      {% else %}
+        <td>{{ rapor.skor_gaya_dada }}</td>
+      {% endif %}
+
+      {% if rapor.skor_gaya_kupu >= 8 %}
+        <td class='text-success'>{{ rapor.skor_gaya_kupu }}</td>
+      {% elif rapor.skor_gaya_kupu >= 5 %}
+        <td class='text-warning'>{{ rapor.skor_gaya_kupu }}</td>
+      {% elif rapor.skor_gaya_kupu < 5 %}
+        <td class='text-danger'>{{ rapor.skor_gaya_kupu }}</td>
+      {% else %}
+        <td>{{ rapor.skor_gaya_kupu }}</td>
+      {% endif %}
+
+      <td>
+        <div class="dropdown no-arrow">
+
+          <a class="dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="far fa-comment-dots"></i>
+          </a>
+
+          <div class="dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+            <div class="mx-3">
+              <div>
+                {{ rapor.komentar }}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </td>
+
+    </tr>
+
+  {% endfor %}
+</table>
+
+<hr>
+<p>
+  <em>
+    <u>Keterangan</u><br>
+    Bagus: <span class='text-success'><strong>8 - 10</strong></span> Poin <br>
+    Cukup: <span class='text-warning'><strong>5 - 7.99</strong></span> Poin <br>
+    Kurang: <span class='text-danger'><strong>0 - 4.99</strong></span> Poin
+  </em>
+</p>
+
+{% endblock content %}

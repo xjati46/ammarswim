@@ -1,0 +1,40 @@
+{% extends "admin_app/base.html" %}
+{% load static %}
+{% load l10n %}
+
+{% block content %}
+<h1>Data Keuangan</h1>
+<table class='table'>
+  <thead align='center'>
+    <th>No.</th>
+    <th>Kode</th>
+    <th>Paket</th>
+    <th>Tanggal Transaksi</th>
+    <th>Diskon</th>
+    <th>Nilai Transaksi</th>
+    <th>Share Dnurs (20%)</th>
+    <th>Share Maestro (80%)</th>
+  </thead>
+  {% for earn in earning_dnurs_list %}
+    <tr align='center'>
+      <td>{{ forloop.counter }}</td>
+      <td><strong>{{ earn.id }}/{{ earn.student.nama_panggilan }}<strong></td>
+      <td>{{ earn.product }}</td>
+      <td>{{ earn.tanggal_transaksi }}</td>
+      {% if earn.diskon %}
+        {% widthratio earn.diskon 1 100 as disc %}
+        <td>{{ disc }} %</td>
+      {% else %}
+        <td></td>
+      {% endif %}
+      <td>Rp {{ earn.bill|localize }}</td>
+      <td>Rp {{ earn.share_dnurs|localize }}</td>
+      <td>Rp {{ earn.share_maestro|localize }}</td>
+    </tr>
+
+  {% endfor %}
+
+
+</table>
+
+{% endblock content %}

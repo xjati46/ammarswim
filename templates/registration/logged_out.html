@@ -1,0 +1,17 @@
+{% extends 'registration/base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Logout | Maestro Swim</title>
+{% endblock title %}
+
+{% block content %}
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1 align=center >Sampai berjumpa kembali!</h1>
+      <a href="{% url 'index' %}"><h3 align=center>Kembali ke halaman utama?</h3></a>
+    </div>
+  </div>
+
+{% endblock content %}

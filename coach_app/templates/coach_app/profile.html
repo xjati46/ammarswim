@@ -1,0 +1,100 @@
+{% extends "coach_app/base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Profil Pelatih</h1>
+<hr>
+
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-user"></i> Nama Lengkap (Panggilan)</span>
+      <h5><strong>{{ user.coach.nama_lengkap }} ({{ user.coach.nama_panggilan }})</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class='fas fa-transgender'></i> Jenis Kelamin</span>
+      <h5><strong>{{ user.coach.jenis_kelamin }}</strong></h5>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-birthday-cake"></i> Tempat, Tanggal Lahir</span>
+      <h5><strong>{{ user.coach.tempat_lahir }}, {{ user.coach.tanggal_lahir }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="fas fa-hourglass-half"></i> Usia</span>
+      <h5><strong>{{ user.coach.usia }} tahun</strong></h5>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-home"></i> Alamat Tinggal</span>
+      <h5><strong>{{ user.coach.alamat_tinggal }}, {{ user.coach.alamat_kotakab }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="fas fa-key"></i> Akses User</span>
+      <h5>
+      {% for group in user.groups.all %}
+        <strong>| {{ group }}</strong>
+      {% endfor %}
+      </h5>
+    </div>
+  </div>
+  <br>
+
+  <h3>Kontak dan Informasi Lain</h3>
+  <hr>
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-mobile"></i> No. Ponsel</span>
+      <h5><strong>{{ user.coach.nomor_ponsel }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="fas fa-envelope"></i> E-Mail</span>
+      <h5><strong>{{ user.coach.alamat_email }}</strong></h5>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-file-invoice-dollar"></i> Nama Bank</span>
+      <h5><strong>{{ user.coach.nama_bank }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="far fa-credit-card"></i> Nomor Rekening</span>
+      <h5><strong>{{ user.coach.nomor_rekening }}</strong></h5>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-user-clock"></i> Pertama Bergabung</span>
+      <h5><strong>{{ user.date_joined }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="far fa-clock"></i> Terakhir Login</span>
+      <h5><strong>{{ user.last_login }}</strong></h5>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-8">
+      <span><i class="fas fa-book-reader"></i> Deskripsi Pelatih</span>
+      <div class="container border">
+        <h5><strong>{{ user.coach.deskripsi }}</strong></h5><br>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+{% endblock content %}

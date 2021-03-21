@@ -1,0 +1,40 @@
+{% extends "coach_app/base.html" %}
+{% load l10n %}
+
+{% block content %}
+<h1>Daftar Latihan Kelas</h1>
+<table class='table'>
+  <thead>
+    <th>No.</th>
+    <th>Kode</th>
+    <th>Nama</th>
+    <th>Paket</th>
+    <th>P. 1</th>
+    <th>P. 2</th>
+    <th>P. 3</th>
+    <th>P. 4</th>
+    <th>P. 5</th>
+    <th>P. 6</th>
+    <th>P. 7</th>
+    <th>P. 8</th>
+  </thead>
+  {% for order in coach_order_kelas_list %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td><a href="{% url 'coach-app:coach-order-detail' order.pk %}"><strong>{{ order.id }}/{{ order.student.nama_panggilan }}<strong></a></td>
+      <td>{{ order.student.nama_lengkap }}</td>
+      <td>{{ order.product }}</td>
+      <td>{{ order.p1 }}</td>
+      <td>{{ order.p2 }}</td>
+      <td>{{ order.p3 }}</td>
+      <td>{{ order.p4 }}</td>
+      <td>{{ order.p5 }}</td>
+      <td>{{ order.p6 }}</td>
+      <td>{{ order.p7 }}</td>
+      <td>{{ order.p8 }}</td>
+    </tr>
+
+  {% endfor %}
+</table>
+
+{% endblock content %}

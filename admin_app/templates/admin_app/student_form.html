@@ -1,0 +1,88 @@
+{% extends "admin_app/base.html" %}
+
+{% block content %}
+<h1>Buat Murid Baru</h1>
+<hr>
+<div class="container">
+  <form method="post" class='user'>
+    {% csrf_token %}
+
+    <table>
+      {{form}}
+    </table>
+
+
+    <br>
+    <input type="submit" value="Simpan" class='btn btn-primary'>
+    <a class='ml-3' href="{% url 'admin-app:student-dnurs-list' %}">Kembali</a>
+  </form>
+</div>
+
+{% endblock content %}
+
+{#
+<div class="form-group row">
+  <div class="col-4">
+    <input type="text" name="nama_lengkap" id="id_nama_lengkap" class="form-control form-control-user" placeholder="Nama Lengkap">
+  </div>
+  <div class="col-2">
+    <input type="text" name="nama_panggilan" id="id_nama_panggilan" class="form-control form-control-user" placeholder="Panggilan">
+  </div>
+  <div class="col-2">
+    <select class="form-control custom-select" name="jenis_kelamin" id='id_jenis_kelamin'>
+      <option value selected>Jenis Kelamin</option>
+      <option value="Laki-laki">Laki-Laki</option>
+      <option value="Perempuan">Perempuan</option>
+    </select>
+  </div>
+  {{ form.nama_lengkap.errors }}
+  {{ form.nama_panggilan.errors }}
+  {{ form.jenis_kelamin.errors}}
+</div>
+
+<div class="form-group row">
+    <div class="col-4">
+      <input type="text" name="tempat_lahir" id="id_tempat_lahir" class="form-control form-control-user" placeholder="Tempat Lahir">
+    </div>
+    <div class="col-4">
+      <input type="text" name="tanggal_lahir" id="id_tanggal_lahir" class="form-control form-control-user" placeholder="Tanggal Lahir">
+    </div>
+    {{ form.tempat_lahir.errors }}
+    {{ form.tanggal_lahir.errors }}
+</div>
+
+<div class="form-group row">
+    <div class="col-4">
+      <input type="text" name="alamat_tinggal" id="id_alamat_tinggal" class="form-control form-control-user" placeholder="Alamat Tinggal">
+    </div>
+    <div class="col-4">
+      <input type="text" name="alamat_kotakab" id="id_alamat_kotakab" class="form-control form-control-user" placeholder="Kota/ Kabupaten">
+    </div>
+    {{ form.alamat_tinggal.errors }}
+    {{ form.alamat_kotakab.errors }}
+</div>
+
+<div class="form-group row">
+    <div class="col-4">
+      <input type="text" name="nomor_ponsel" id="id_nomor_ponsel" class="form-control form-control-user" placeholder="No. Ponsel/ WhatsApp">
+    </div>
+    <div class="col-4">
+      <input type="text" name="alamat_email" id="id_alamat_email" class="form-control form-control-user" placeholder="E-mail">
+    </div>
+    {{ form.nomor_ponsel.errors }}
+    {{ form.alamat_email.errors }}
+</div>
+
+<div class="form-group row">
+  <div class="col-8">
+  <textarea class='form-control' name="deskripsi" id="id_deskripsi" placeholder="Deskripsi diri, riwayat penyakit, phobia, dll..."></textarea>
+  </div>
+  {{ form.deskripsi.errors }}
+</div>
+
+<div class="form-group row">
+  <div class="col-4">
+    <select class="custom-select" name="afiliasi" id='id_afiliasi'>
+      <option value='Dnurs' selected>Dnurs</option>
+    </select>
+</div> #}

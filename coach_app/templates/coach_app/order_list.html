@@ -1,0 +1,54 @@
+{% extends "coach_app/base.html" %}
+{% load l10n %}
+
+{% block content %}
+<h1>Daftar Latihan Privat</h1>
+<table class='table'>
+  <thead>
+    <th>No.</th>
+    <th>Kode</th>
+    <th>Nama</th>
+    <th>Paket</th>
+    <th>Honor per Sesi</th>
+    <th>Masa Berlaku</th>
+    <th>Jumlah Latihan</th>
+  </thead>
+  {% for order in coach_order_list %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td><a href="{% url 'coach-app:coach-order-detail' order.pk %}"><strong>{{ order.id }}/{{ order.student.nama_panggilan }}<strong></a></td>
+      <td>{{ order.student.nama_lengkap }}</td>
+      <td>{{ order.product }}</td>
+      <td>Rp {{ order.product.fee_pelatih|localize }}</td>
+      <!-- <td>
+        {% if order.student.afiliasi == 'Dnurs' %}
+          Rp {{ order.coach_share_dnurs|localize }}
+          {% if order.diskon %}
+            {% widthratio order.diskon 1 100 as disc %}
+            <strong><sup class='text-warning'>*Promo {{disc}}%</sup></strong>
+          {% endif %}
+        {% else %}
+          Rp {{ order.coach_share|localize }}
+          {% if order.diskon %}
+            {% widthratio order.diskon 1 100 as disc %}
+            <strong><sup class='text-warning'>*Promo {{disc}}%</sup></strong>
+          {% endif %}
+        {% endif %}
+      </td> -->
+      <td>
+        {{ order.tanggal_transaksi }} - {{ order.tanggal_expired }} |
+        <strong>
+          <span class='text-danger'>{{ order.is_expired }}</span>
+        </strong>
+      </td>
+      <td>{{ order.p_total }} / {{ order.product.jumlah_pertemuan }} |
+        <strong>
+          <span class='text-danger'>{{ order.p_status }}</span>
+        </strong>
+      </td>
+    </tr>
+
+  {% endfor %}
+</table>
+
+{% endblock content %}

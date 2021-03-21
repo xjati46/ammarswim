@@ -1,0 +1,449 @@
+{% extends "coach_app/base.html" %}
+{% load l10n %}
+
+{% block content %}
+<h1>Update Order</h1>
+<hr>
+
+{% if order.jenis_order == 'p' %}
+  <div class="container">
+    <div class="row">
+      <div class="col-4">
+        <span><i class="fas fa-code"></i> Kode Latihan</span>
+        <h5><strong>{{ order.id }}/{{ order.student.nama_panggilan }}</strong></h5>
+      </div>
+      <div class="col-4">
+        <span><i class="fas fa-user"></i> Nama Lengkap</span>
+        <h5><strong>{{ order.student.nama_lengkap }}</strong></h5>
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-4">
+        <span><i class="fas fa-shopping-cart"></i> Paket Latihan</span>
+        <h5><strong>{{ order.product }}</strong></h5>
+      </div>
+
+      <div class="col-4">
+        <span>
+          <i class="fas fa-money-bill"></i> Honor per Sesi
+          {% if order.diskon %}
+            {% widthratio order.diskon 1 100 as disc %}
+            <strong><sup class='text-warning'>*Promo {{disc}}%</sup></strong>
+          {% endif %}
+        </span>
+        <!-- {% if order.student.afiliasi == 'Dnurs' %}
+          <h5><strong>Rp {{ order.coach_share_dnurs|localize }}</strong> / pertemuan</h5>
+        {% else %}
+          <h5><strong>Rp {{ order.coach_share|localize }}</strong> / pertemuan</h5>
+        {% endif %} -->
+        <h5><strong>Rp {{ order.product.fee_pelatih|localize }}</strong></h5>
+      </div>
+
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-4">
+        <span><i class="fas fa-calendar-check"></i> Tanggal Transaksi</span>
+        <h5><strong>{{ order.tanggal_transaksi }}</strong></h5>
+      </div>
+      <div class="col-4">
+        <span><i class="fas fa-calendar-times"></i> Tanggal Expired</span>
+        <h5>
+          <strong>
+            {{ order.tanggal_expired }} |
+          {% if order.is_expired == '✘EXPIRED' %}
+            <span class='text-danger'>{{ order.is_expired }}</span>
+          {% endif %}
+          </strong>
+        </h5>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <div class="container">
+    <form method="post" class='user'>
+      {% csrf_token %}
+      <table>
+        {% if order.product.jumlah_pertemuan == 1 %}
+
+          <div class="row" id='p1'>
+            <div class="col-2">
+              {{ form.p1.label_tag }}
+              {% if order.p1_c %}
+                <i class='fas fa-lock ml-4'></i>
+              {% endif %}
+            </div>
+            <div class="col-2">
+              {{ form.p1 }}
+              {{ form.p1.errors }}
+            </div>
+          </div>
+
+        {% elif order.product.jumlah_pertemuan == 4 %}
+
+          <div class="row" id='p1'>
+            <div class="col-2">
+              {{ form.p1.label_tag }}
+              {% if order.p1_c %}
+                <i class='fas fa-lock ml-4'></i>
+              {% endif %}
+            </div>
+            <div class="col-2">
+              {{ form.p1 }}
+              {{ form.p1.errors }}
+            </div>
+          </div>
+
+
+          <div class="row" id='p2'>
+            <div class="col-2">
+              {{ form.p2.label_tag }}
+              {% if order.p2_c %}
+                <i class='fas fa-lock ml-4'></i>
+              {% endif %}
+            </div>
+            <div class="col-2">
+              {{ form.p2 }}
+              {{ form.p2.errors }}
+            </div>
+          </div>
+
+          <div class="row" id='p3'>
+            <div class="col-2">
+              {{ form.p3.label_tag }}
+              {% if order.p3_c %}
+                <i class='fas fa-lock ml-4'></i>
+              {% endif %}
+            </div>
+            <div class="col-2">
+              {{ form.p3 }}
+              {{ form.p3.errors }}
+            </div>
+          </div>
+
+          <div class="row" id='p4'>
+            <div class="col-2">
+              {{ form.p4.label_tag }}
+              {% if order.p4_c %}
+                <i class='fas fa-lock ml-4'></i>
+              {% endif %}
+            </div>
+            <div class="col-2">
+              {{ form.p4 }}
+              {{ form.p4.errors }}
+            </div>
+          </div>
+
+
+        {% else %}
+
+
+          <div class="row">
+            <div class="col">
+
+
+              <div class="row" id='p1'>
+                <div class="col-4">
+                  {{ form.p1.label_tag }}
+                  {% if order.p1_c %}
+                    <i class='fas fa-lock ml-4'></i>
+                  {% endif %}
+                </div>
+                <div class="col-4">
+                  {{ form.p1 }}
+                  {{ form.p1.errors }}
+                </div>
+              </div>
+
+              <div class="row" id='p2'>
+                <div class="col-4">
+                  {{ form.p2.label_tag }}
+                  {% if order.p2_c %}
+                    <i class='fas fa-lock ml-4'></i>
+                  {% endif %}
+                </div>
+                <div class="col-4">
+                  {{ form.p2 }}
+                  {{ form.p2.errors }}
+                </div>
+              </div>
+
+              <div class="row" id='p3'>
+                <div class="col-4">
+                  {{ form.p3.label_tag }}
+                  {% if order.p3_c %}
+                    <i class='fas fa-lock ml-4'></i>
+                  {% endif %}
+                </div>
+                <div class="col-4">
+                  {{ form.p3 }}
+                  {{ form.p3.errors }}
+                </div>
+              </div>
+
+              <div class="row" id='p4'>
+                <div class="col-4">
+                  {{ form.p4.label_tag }}
+                  {% if order.p4_c %}
+                    <i class='fas fa-lock ml-4'></i>
+                  {% endif %}
+                </div>
+                <div class="col-4">
+                  {{ form.p4 }}
+                  {{ form.p4.errors }}
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col">
+
+              <div class="row" id='p5'>
+                <div class="col-4">
+                  {{ form.p5.label_tag }}
+                  {% if order.p5_c %}
+                    <i class='fas fa-lock ml-4'></i>
+                  {% endif %}
+                </div>
+                <div class="col-4">
+                  {{ form.p5 }}
+                  {{ form.p5.errors }}
+                </div>
+              </div>
+
+              <div class="row" id='p6'>
+                <div class="col-4">
+                  {{ form.p6.label_tag }}
+                  {% if order.p6_c %}
+                    <i class='fas fa-lock ml-4'></i>
+                  {% endif %}
+                </div>
+                <div class="col-4">
+                  {{ form.p6 }}
+                  {{ form.p6.errors }}
+                </div>
+              </div>
+
+              <div class="row" id='p7'>
+                <div class="col-4">
+                  {{ form.p7.label_tag }}
+                  {% if order.p7_c %}
+                    <i class='fas fa-lock ml-4'></i>
+                  {% endif %}
+                </div>
+                <div class="col-4">
+                  {{ form.p7 }}
+                  {{ form.p7.errors }}
+                </div>
+              </div>
+
+              <div class="row" id='p8'>
+                <div class="col-4">
+                  {{ form.p8.label_tag }}
+                  {% if order.p8_c %}
+                    <i class='fas fa-lock ml-4'></i>
+                  {% endif %}
+                </div>
+                <div class="col-4">
+                  {{ form.p8 }}
+                  {{ form.p8.errors }}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        {% endif %}
+
+      </table>
+
+
+      <br>
+      <input type="submit" value="Simpan" class='btn btn-primary'>
+      <a class='ml-3' href="{% url 'coach-app:coach-order-detail' order.pk %}">Kembali</a>
+    </form>
+  </div>
+{% else %}
+  <div class="container">
+    <div class="row">
+      <div class="col-4">
+        <span><i class="fas fa-code"></i> Kode Latihan</span>
+        <h5><strong>{{ order.id }}/{{ order.student.nama_panggilan }}</strong></h5>
+      </div>
+      <div class="col-4">
+        <span><i class="fas fa-user"></i> Nama Lengkap</span>
+        <h5><strong>{{ order.student.nama_lengkap }}</strong></h5>
+      </div>
+      <div class="col-4">
+        <span><i class="fas fa-shopping-cart"></i> Paket Latihan</span>
+        <h5><strong>{{ order.product }}</strong></h5>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container">
+    <form method="post" class='user'>
+      {% csrf_token %}
+      <table>
+        
+        <div class="row">
+          <div class="col">
+
+
+            <div class="row" id='p1'>
+              <div class="col-4">
+                {{ form.p1.label_tag }}
+                {% if order.p1_c %}
+                  <i class='fas fa-lock ml-4'></i>
+                {% endif %}
+              </div>
+              <div class="col-4">
+                {{ form.p1 }}
+                {{ form.p1.errors }}
+              </div>
+            </div>
+
+            <div class="row" id='p2'>
+              <div class="col-4">
+                {{ form.p2.label_tag }}
+                {% if order.p2_c %}
+                  <i class='fas fa-lock ml-4'></i>
+                {% endif %}
+              </div>
+              <div class="col-4">
+                {{ form.p2 }}
+                {{ form.p2.errors }}
+              </div>
+            </div>
+
+            <div class="row" id='p3'>
+              <div class="col-4">
+                {{ form.p3.label_tag }}
+                {% if order.p3_c %}
+                  <i class='fas fa-lock ml-4'></i>
+                {% endif %}
+              </div>
+              <div class="col-4">
+                {{ form.p3 }}
+                {{ form.p3.errors }}
+              </div>
+            </div>
+
+            <div class="row" id='p4'>
+              <div class="col-4">
+                {{ form.p4.label_tag }}
+                {% if order.p4_c %}
+                  <i class='fas fa-lock ml-4'></i>
+                {% endif %}
+              </div>
+              <div class="col-4">
+                {{ form.p4 }}
+                {{ form.p4.errors }}
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col">
+
+            <div class="row" id='p5'>
+              <div class="col-4">
+                {{ form.p5.label_tag }}
+                {% if order.p5_c %}
+                  <i class='fas fa-lock ml-4'></i>
+                {% endif %}
+              </div>
+              <div class="col-4">
+                {{ form.p5 }}
+                {{ form.p5.errors }}
+              </div>
+            </div>
+
+            <div class="row" id='p6'>
+              <div class="col-4">
+                {{ form.p6.label_tag }}
+                {% if order.p6_c %}
+                  <i class='fas fa-lock ml-4'></i>
+                {% endif %}
+              </div>
+              <div class="col-4">
+                {{ form.p6 }}
+                {{ form.p6.errors }}
+              </div>
+            </div>
+
+            <div class="row" id='p7'>
+              <div class="col-4">
+                {{ form.p7.label_tag }}
+                {% if order.p7_c %}
+                  <i class='fas fa-lock ml-4'></i>
+                {% endif %}
+              </div>
+              <div class="col-4">
+                {{ form.p7 }}
+                {{ form.p7.errors }}
+              </div>
+            </div>
+
+            <div class="row" id='p8'>
+              <div class="col-4">
+                {{ form.p8.label_tag }}
+                {% if order.p8_c %}
+                  <i class='fas fa-lock ml-4'></i>
+                {% endif %}
+              </div>
+              <div class="col-4">
+                {{ form.p8 }}
+                {{ form.p8.errors }}
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+      </table>
+
+
+      <br>
+      <input type="submit" value="Simpan" class='btn btn-primary'>
+      <a class='ml-3' href="{% url 'coach-app:coach-order-detail' order.pk %}">Kembali</a>
+    </form>
+  </div>
+{% endif %}
+
+
+
+<script>
+  {% if order.p1_c %}
+    $("#p1").addClass("disabledbutton");
+  {% endif %}
+  {% if order.p2_c %}
+    $("#p2").addClass("disabledbutton");
+  {% endif %}
+  {% if order.p3_c %}
+    $("#p3").addClass("disabledbutton");
+  {% endif %}
+  {% if order.p4_c %}
+    $("#p4").addClass("disabledbutton");
+  {% endif %}
+  {% if order.p5_c %}
+    $("#p1").addClass("disabledbutton");
+  {% endif %}
+  {% if order.p6_c %}
+    $("#p2").addClass("disabledbutton");
+  {% endif %}
+  {% if order.p7_c %}
+    $("#p3").addClass("disabledbutton");
+  {% endif %}
+  {% if order.p8_c %}
+    $("#p4").addClass("disabledbutton");
+  {% endif %}
+</script>
+
+{% endblock content %}

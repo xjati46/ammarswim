@@ -1,0 +1,55 @@
+{% extends "admin_app/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1>Profil Admin</h1>
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-user"></i> Nama User</span>
+      <h5><strong>{{ user.username }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="fas fa-asterisk"></i> Password</span>
+      <h5><strong>* * * * * * * *</strong></h5><button class='btn btn-warning' type="button" name="button" onclick="document.location='{% url 'password_reset' %}'">Ubah Password</button>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-envelope"></i> Alamat Email</span>
+      <h5><strong>{{ user.email }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="fas fa-key"></i> Akses User</span>
+      <h5>
+      {% for group in user.groups.all %}
+        <strong>| {{ group }}</strong>
+      {% endfor %}
+      </h5>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-user-clock"></i> Pertama Bergabung</span>
+      <h5><strong>{{ user.date_joined }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="far fa-clock"></i> Terakhir Login</span>
+      <h5><strong>{{ user.last_login }}</strong></h5>
+    </div>
+  </div>
+
+  <br>
+
+
+
+</div>
+
+
+{% endblock content %}

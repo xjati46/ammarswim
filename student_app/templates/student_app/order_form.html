@@ -1,0 +1,325 @@
+{% extends "student_app/base.html" %}
+{% load l10n %}
+
+{% block content %}
+<h1>Update Order</h1>
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-code"></i> Kode Latihan</span>
+      <h5><strong>{{ order.id }}/{{ order.student.nama_panggilan }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="fas fa-user"></i> Nama Lengkap</span>
+      <h5><strong>{{ order.student.nama_lengkap }}</strong></h5>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-shopping-cart"></i> Paket Latihan</span>
+      <h5><strong>{{ order.product }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="fas fa-money-bill"></i> Nilai Transaksi</span>
+      <h5><strong>Rp {{ order.bill|localize }}</strong></h5>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-calendar-check"></i> Tanggal Transaksi</span>
+      <h5><strong>{{ order.tanggal_transaksi }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="fas fa-calendar-times"></i> Tanggal Expired</span>
+      <h5>
+        <strong>
+          {{ order.tanggal_expired }} |
+        {% if order.is_expired == 'EXPIRED' %}
+          <span class='text-danger'>{{ order.is_expired }}</span>
+        {% else %}
+          <span class='text-success'>{{ order.is_expired }}</span>
+        {% endif %}
+        </strong>
+      </h5>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="container">
+  <form method="post" class='user'>
+    {% csrf_token %}
+    <table>
+      {% if order.product.jumlah_pertemuan == 1 %}
+
+          <div class="row" id='p1'>
+
+            <div class="col-2">
+              Pertemuan 1:
+            </div>
+
+            <div class="col-2">
+              {{ order.p1 }}
+            </div>
+
+            {% if order.p1 %}
+              <div class="col-2">
+                {{ form.p1_a }}
+                {{ form.p1_a.errors }}
+              </div>
+            {% endif %}
+
+          </div>
+
+      {% elif order.product.jumlah_pertemuan == 4 %}
+
+        <div class="row" id='p1'>
+
+          <div class="col-2">
+            Pertemuan 1:
+          </div>
+
+          <div class="col-2">
+            {{ order.p1 }}
+          </div>
+
+          {% if order.p1 %}
+          <div class="col-2">
+            {{ form.p1_a }}
+            {{ form.p1_a.errors }}
+          </div>
+          {% endif %}
+
+        </div>
+
+        <div class="row" id='p2'>
+
+          <div class="col-2">
+            Pertemuan 2:
+          </div>
+
+          <div class="col-2">
+            {{ order.p2 }}
+          </div>
+
+          {% if order.p2 %}
+          <div class="col-2">
+            {{ form.p2_a }}
+            {{ form.p2_a.errors }}
+          </div>
+          {% endif %}
+
+        </div>
+
+        <div class="row" id='p3'>
+
+          <div class="col-2">
+            Pertemuan 3:
+          </div>
+
+          <div class="col-2">
+            {{ order.p3 }}
+          </div>
+
+          {% if order.p3 %}
+          <div class="col-2">
+            {{ form.p3_a }}
+            {{ form.p3_a.errors }}
+          </div>
+          {% endif %}
+
+        </div>
+
+        <div class="row" id='p4'>
+
+          <div class="col-2">
+            Pertemuan 4:
+          </div>
+
+          <div class="col-2">
+            {{ order.p4 }}
+          </div>
+
+          {% if order.p4 %}
+          <div class="col-2">
+            {{ form.p4_a }}
+            {{ form.p4_a.errors }}
+          </div>
+          {% endif %}
+
+        </div>
+
+      {% else %}
+        <div class="row">
+          <div class="col">
+
+            <div class="row" id='p1'>
+              <div class="col-2">
+                Pertemuan 1:
+              </div>
+              <div class="col-2">
+                {{ order.p1 }}
+              </div>
+              {% if order.p1 %}
+              <div class="col-2">
+                {{ form.p1_a }}
+                {{ form.p1_a.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="row" id='p2'>
+              <div class="col-2">
+                Pertemuan 2:
+              </div>
+              <div class="col-2">
+                {{ order.p2 }}
+              </div>
+              {% if order.p2 %}
+              <div class="col-2">
+                {{ form.p2_a }}
+                {{ form.p2_a.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="row" id='p3'>
+              <div class="col-2">
+                Pertemuan 3:
+              </div>
+              <div class="col-2">
+                {{ order.p3 }}
+              </div>
+              {% if order.p3 %}
+              <div class="col-2">
+                {{ form.p3_a }}
+                {{ form.p3_a.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="row" id='p4'>
+              <div class="col-2">
+                Pertemuan 4:
+              </div>
+              <div class="col-2">
+                {{ order.p4 }}
+              </div>
+              {% if order.p4 %}
+              <div class="col-2">
+                {{ form.p4_a }}
+                {{ form.p4_a.errors }}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="col">
+
+            <div class="row" id='p5'>
+              <div class="col-2">
+                Pertemuan 5:
+              </div>
+              <div class="col-2">
+                {{ order.p5 }}
+              </div>
+              {% if order.p5 %}
+              <div class="col-2">
+                {{ form.p5_a }}
+                {{ form.p5_a.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="row" id='p6'>
+              <div class="col-2">
+                Pertemuan 6:
+              </div>
+              <div class="col-2">
+                {{ order.p6 }}
+              </div>
+              {% if order.p6 %}
+              <div class="col-2">
+                {{ form.p6_a }}
+                {{ form.p6_a.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="row" id='p7'>
+              <div class="col-2">
+                Pertemuan 7:
+              </div>
+              <div class="col-2">
+                {{ order.p7 }}
+              </div>
+              {% if order.p7 %}
+              <div class="col-2">
+                {{ form.p7_a }}
+                {{ form.p7_a.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="row" id='p8'>
+              <div class="col-2">
+                Pertemuan 8:
+              </div>
+              <div class="col-2">
+                {{ order.p8 }}
+              </div>
+              {% if order.p8 %}
+              <div class="col-2">
+                {{ form.p8_a }}
+                {{ form.p8_a.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+          </div>
+        </div>
+      {% endif %}
+
+    </table>
+
+
+    <br>
+    <input type="submit" value="Simpan" class='btn btn-primary'>
+    <a class='ml-3' href="{% url 'student-app:student-order-detail' order.pk %}">Kembali</a>
+  </form>
+</div>
+
+<script>
+
+  {% if order.p1_a %}
+    $("#p1").addClass("disabledbutton");
+  {% endif %}
+  {% if order.p2_a %}
+    $("#p2").addClass("disabledbutton");
+  {% endif %}
+  {% if order.p3_a %}
+    $("#p3").addClass("disabledbutton");
+  {% endif %}
+  {% if order.p4_a %}
+    $("#p4").addClass("disabledbutton");
+  {% endif %}
+  {% if order.p5_a %}
+    $("#p1").addClass("disabledbutton");
+  {% endif %}
+  {% if order.p6_a %}
+    $("#p2").addClass("disabledbutton");
+  {% endif %}
+  {% if order.p7_a %}
+    $("#p3").addClass("disabledbutton");
+  {% endif %}
+  {% if order.p8_a %}
+    $("#p4").addClass("disabledbutton");
+  {% endif %}
+</script>
+
+{% endblock content %}

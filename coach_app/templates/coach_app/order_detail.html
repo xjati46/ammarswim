@@ -1,0 +1,299 @@
+{% extends "coach_app/base.html" %}
+{% load l10n %}
+
+{% block content %}
+<h1>Data Latihan</h1>
+<hr>
+
+{% if order.jenis_order == 'p' %}
+  <div class="container">
+    <div class="row">
+      <div class="col-4">
+        <span><i class="fas fa-code"></i> Kode Latihan</span>
+        <h5><strong>{{ order.id }}/{{ order.student.nama_panggilan }}</strong></h5>
+      </div>
+      <div class="col-4">
+        <span><i class="fas fa-user"></i> Nama Lengkap</span>
+        <h5><strong>{{ order.student.nama_lengkap }}</strong></h5>
+      </div>
+      <div class="col-4">
+        <span><i class="fas fa-money-bill-wave"></i> Dana Telah Terkumpul</span>
+        <!-- {% if order.student.afiliasi == 'Dnurs' %}
+          <h5 class='text-success'><strong>Rp {{ order.income_coach_dnurs|localize }}</strong></h5>
+        {% else %}
+          <h5 class='text-success'><strong>Rp {{order.income_coach_normal|localize}}</strong></h5>
+        {% endif %} -->
+        <h5 class='text-success'><strong>Rp {{order.income_coach_normal|localize}}</strong></h5>
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-4">
+        <span><i class="fas fa-shopping-cart"></i> Paket Latihan</span>
+        <h5><strong>{{ order.product }}</strong></h5>
+      </div>
+      <div class="col-4">
+        <span>
+          <i class="fas fa-money-bill"></i> Honor per Sesi
+          {% if order.diskon %}
+            {% widthratio order.diskon 1 100 as disc %}
+            <strong><sup class='text-warning'>*Promo {{disc}}%</sup></strong>
+          {% endif %}
+        </span>
+        <!-- {% if order.student.afiliasi == 'Dnurs' %}
+          <h5><strong>Rp {{ order.coach_share_dnurs|localize }}</strong> / pertemuan</h5>
+        {% else %}
+          <h5><strong>Rp {{ order.coach_share|localize }}</strong> / pertemuan</h5>
+        {% endif %} -->
+        <h5><strong>Rp {{ order.product.fee_pelatih|localize }}</strong></h5>
+      </div>
+      <div class="col-4">
+        <span><i class="fas fa-money-bill-wave-alt"></i> Dana Belum Terkumpul</span>
+        <!-- {% if order.student.afiliasi == 'Dnurs' %}
+          <h5 class='text-warning'><strong>Rp {{ order.potential_income_coach_dnurs|localize }}</strong></h5>
+        {% else %}
+          <h5 class='text-warning'><strong>Rp {{order.potential_income_coach_normal|localize}}</strong></h5>
+        {% endif %} -->
+    
+        <h5 class='text-warning'><strong>Rp {{order.potential_income_coach_normal|localize}}</strong></h5>
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-4">
+        <span><i class="fas fa-calendar-check"></i> Tanggal Transaksi</span>
+        <h5><strong>{{ order.tanggal_transaksi }}</strong></h5>
+      </div>
+      <div class="col-4">
+        <span><i class="fas fa-calendar-times"></i> Tanggal Expired</span>
+        <h5>
+          <strong>
+            {{ order.tanggal_expired }} |
+          {% if order.is_expired == '✘EXPIRED' %}
+            <span class='text-danger'>{{ order.is_expired }}</span>
+          {% endif %}
+          </strong>
+        </h5>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container">
+    <div class="row">
+      {% if order.product.jumlah_pertemuan == 1 %}
+      <div class="col-6">
+        <table class='table table-striped'>
+          <thead>
+            <tr class='text-center'>
+              <th>Pertemuan</th>
+              <th>Tanggal</th>
+              <th>Lunas?</th>
+            </tr>
+          </thead>
+          <tr class='text-center'>
+            <td class='text-center'>1</td>
+            <td>{{ order.p1 }}</td>
+            <td>{{ order.p1_c|yesno:"✔,✘" }}</td>
+          </tr>
+        </table>
+      </div>
+      {% elif order.product.jumlah_pertemuan == 4 %}
+      <div class="col-6">
+        <table class='table table-striped'>
+          <thead>
+            <tr class='text-center'>
+              <th>Pertemuan</th>
+              <th>Tanggal</th>
+              <th>Lunas?</th>
+            </tr>
+          </thead>
+          <tr class='text-center'>
+            <td>1</td>
+            <td>{{ order.p1 }}</td>
+            <td>{{ order.p1_c|yesno:"✔,✘" }}</td>
+          </tr>
+          <tr class='text-center'>
+            <td>2</td>
+            <td>{{ order.p2 }}</td>
+            <td>{{ order.p2_c|yesno:"✔,✘" }}</td>
+          </tr>
+          <tr class='text-center'>
+            <td>3</td>
+            <td>{{ order.p3 }}</td>
+            <td>{{ order.p3_c|yesno:"✔,✘" }}</td>
+          </tr>
+          <tr class='text-center'>
+            <td>4</td>
+            <td>{{ order.p4 }}</td>
+            <td>{{ order.p4_c|yesno:"✔,✘" }}</td>
+          </tr>
+        </table>
+      </div>
+      {% else %}
+      <div class="col-6">
+        <table class='table table-striped'>
+          <thead>
+            <tr class='text-center'>
+              <th>Pertemuan</th>
+              <th>Tanggal</th>
+              <th>Lunas?</th>
+            </tr>
+          </thead>
+          <tr class='text-center'>
+            <td>1</td>
+            <td>{{ order.p1 }}</td>
+            <td>{{ order.p1_c|yesno:"✔,✘" }}</td>
+          </tr>
+          <tr class='text-center'>
+            <td>2</td>
+            <td>{{ order.p2 }}</td>
+            <td>{{ order.p2_c|yesno:"✔,✘" }}</td>
+          </tr>
+          <tr class='text-center'>
+            <td>3</td>
+            <td>{{ order.p3 }}</td>
+            <td>{{ order.p3_c|yesno:"✔,✘" }}</td>
+          </tr>
+          <tr class='text-center'>
+            <td>4</td>
+            <td>{{ order.p4 }}</td>
+            <td>{{ order.p4_c|yesno:"✔,✘" }}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-6">
+        <table class='table table-striped' >
+          <thead>
+            <tr class='text-center'>
+              <th>Pertemuan</th>
+              <th>Tanggal</th>
+              <th>Lunas?</th>
+            </tr>
+          </thead>
+          <tr class='text-center'>
+            <td>5</td>
+            <td>{{ order.p5 }}</td>
+            <td>{{ order.p5_c|yesno:"✔,✘" }}</td>
+          </tr>
+          <tr class='text-center'>
+            <td>6</td>
+            <td>{{ order.p6 }}</td>
+            <td>{{ order.p6_c|yesno:"✔,✘" }}</td>
+          </tr>
+          <tr class='text-center'>
+            <td>7</td>
+            <td>{{ order.p7 }}</td>
+            <td>{{ order.p7_c|yesno:"✔,✘" }}</td>
+          </tr>
+          <tr class='text-center'>
+            <td>8</td>
+            <td>{{ order.p8 }}</td>
+            <td>{{ order.p8_c|yesno:"✔,✘" }}</td>
+          </tr>
+        </table>
+      </div>
+      {% endif %}
+    </div>
+    <br>
+    <button class='btn btn-warning' onclick="document.location='{% url 'coach-app:coach-order-update' order.pk %}'">Ubah</button>
+    <a class='ml-3' href="{% url 'coach-app:coach-order-list' %}">Kembali</a>
+  </div>
+
+{% else %}
+  <div class="container">
+    <div class="row">
+      <div class="col-4">
+        <span><i class="fas fa-code"></i> Kode Latihan</span>
+        <h5><strong>{{ order.id }}/{{ order.student.nama_panggilan }}</strong></h5>
+      </div>
+      <div class="col-4">
+        <span><i class="fas fa-user"></i> Nama Lengkap</span>
+        <h5><strong>{{ order.student.nama_lengkap }}</strong></h5>
+      </div>
+      <div class="col-4">
+        <span><i class="fas fa-shopping-cart"></i> Paket Latihan</span>
+        <h5><strong>{{ order.product }}</strong></h5>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-6">
+        <table class='table table-striped'>
+          <thead>
+            <tr class='text-center'>
+              <th>Pertemuan</th>
+              <th>Tanggal</th>
+            </tr>
+          </thead>
+          <tr class='text-center'>
+            <td>1</td>
+            <td>{{ order.p1 }}</td>
+          </tr>
+          <tr class='text-center'>
+            <td>2</td>
+            <td>{{ order.p2 }}</td>
+          </tr>
+          <tr class='text-center'>
+            <td>3</td>
+            <td>{{ order.p3 }}</td>
+          </tr>
+          <tr class='text-center'>
+            <td>4</td>
+            <td>{{ order.p4 }}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-6">
+        <table class='table table-striped' >
+          <thead>
+            <tr class='text-center'>
+              <th>Pertemuan</th>
+              <th>Tanggal</th>
+            </tr>
+          </thead>
+          <tr class='text-center'>
+            <td>5</td>
+            <td>{{ order.p5 }}</td>
+          </tr>
+          <tr class='text-center'>
+            <td>6</td>
+            <td>{{ order.p6 }}</td>
+          </tr>
+          <tr class='text-center'>
+            <td>7</td>
+            <td>{{ order.p7 }}</td>
+          </tr>
+          <tr class='text-center'>
+            <td>8</td>
+            <td>{{ order.p8 }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    
+    <br>
+    <button class='btn btn-warning' onclick="document.location='{% url 'coach-app:coach-order-update' order.pk %}'">Ubah</button>
+    
+    
+    {% if order.jenis_order == 'p' %}
+      <a class='ml-3' href="{% url 'coach-app:coach-order-list' %}">Kembali</a>
+    {% else %}
+      <a class='ml-3' href="{% url 'coach-app:coach-order-kelas-list' %}">Kembali</a>
+    {% endif %}
+    
+  </div>
+{% endif %}
+
+
+
+{% endblock content %}

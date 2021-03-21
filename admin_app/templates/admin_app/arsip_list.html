@@ -1,0 +1,42 @@
+{% extends "admin_app/base.html" %}
+{% load static %}
+{% load l10n %}
+
+{% block content %}
+<h1>Arsip</h1>
+<table class='table'>
+  <thead align='center'>
+    <th>No.</th>
+    <th>Kode</th>
+    <th>Nama</th>
+    <th>Pelatih</th>
+    <th>Paket</th>
+    <th>Tanggal Transaksi</th>
+    <th>Diskon</th>
+    <th>Nilai Transaksi</th>
+    <th>Jumlah Latihan</th>
+  </thead>
+  {% for arsip in arsip_dnurs_list %}
+    <tr align='center'>
+      <td>{{ forloop.counter }}</td>
+      <td><a href="{% url 'admin-app:arsip-dnurs-detail' arsip.pk %}">{{ arsip }}</a></td>
+      <td>{{ arsip.student.nama_lengkap }}</td>
+      <td>{{ arsip.coach }}</td>
+      <td>{{ arsip.product }}</td>
+      <td>{{ arsip.tanggal_transaksi }}</td>
+      {% if arsip.diskon %}
+        {% widthratio arsip.diskon 1 100 as disc %}
+        <td>{{ disc }} %</td>
+      {% else %}
+        <td></td>
+      {% endif %}
+      <td>Rp {{ arsip.bill|localize }}</td>
+      <td>{{ arsip.p_total }} / {{ arsip.product.jumlah_pertemuan }}</td>
+    </tr>
+
+  {% endfor %}
+
+
+</table>
+
+{% endblock content %}

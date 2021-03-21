@@ -1,0 +1,72 @@
+{% extends "coach_app/base.html" %}
+{% load l10n %}
+
+{% block content %}
+<h1>Arsip</h1>
+<table class='table'>
+  <thead>
+    <th>No.</th>
+    <th>Kode</th>
+    <th>Nama</th>
+    <th>Paket</th>
+    <th>Masa Berlaku</th>
+    <th>Jumlah Latihan</th>
+    <th>Rincian Latihan</th>
+  </thead>
+  {% for arsip in coach_arsip_list %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ arsip.id }}/{{ arsip.student.nama_panggilan }}</td>
+      <td>{{ arsip.student.nama_lengkap }}</td>
+      <td>{{ arsip.product }}</td>
+      <td>
+        {{ arsip.tanggal_transaksi }} - {{ arsip.tanggal_expired }} |
+        <strong>
+          <span class='text-danger'>{{ arsip.is_expired }}</span>
+        </strong>
+      </td>
+      <td>{{ arsip.p_total }} / {{ arsip.product.jumlah_pertemuan }} |
+        <strong>
+          <span class='text-danger'>{{ arsip.p_status }}</span>
+        </strong>
+      </td>
+
+      <td>
+        <div class="dropdown no-arrow">
+
+          <a class="dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-calendar-alt"></i>
+          </a>
+
+          <div class="dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
+            <div class="mx-3">
+              <div>
+                <p>1: {{ arsip.p1 }}</p>
+                {% if arsip.product.jumlah_pertemuan == 4 %}
+                  <p>2: {{ arsip.p2 }}</p>
+                  <p>3: {{ arsip.p3 }}</p>
+                  <p>4: {{ arsip.p4 }}</p>
+                {% elif arsip.product.jumlah_pertemuan == 8 %}
+                  <p>2: {{ arsip.p2 }}</p>
+                  <p>3: {{ arsip.p3 }}</p>
+                  <p>4: {{ arsip.p4 }}</p>
+                  <p>5: {{ arsip.p5 }}</p>
+                  <p>6: {{ arsip.p6 }}</p>
+                  <p>7: {{ arsip.p7 }}</p>
+                  <p>8: {{ arsip.p8 }}</p>
+                {% endif %}
+
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </td>
+
+    </tr>
+
+  {% endfor %}
+</table>
+
+{% endblock content %}

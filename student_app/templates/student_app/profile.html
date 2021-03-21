@@ -1,0 +1,87 @@
+{% extends "student_app/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1>Profil Murid</h1>
+<hr>
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-user"></i> Nama Lengkap (Panggilan)</span>
+      <h5><strong>{{ user.student.nama_lengkap }} ({{ user.student.nama_panggilan }})</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class='fas fa-transgender'></i> Jenis Kelamin</span>
+      <h5><strong>{{ user.student.jenis_kelamin }}</strong></h5>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-birthday-cake"></i> Tempat, Tanggal Lahir</span>
+      <h5><strong>{{ user.student.tempat_lahir }}, {{ user.student.tanggal_lahir }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="fas fa-home"></i> Alamat Tinggal</span>
+      <h5><strong>{{ user.student.alamat_tinggal }}, {{ user.student.alamat_kotakab }}</strong></h5>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-mobile"></i> No. Ponsel</span>
+      <h5><strong>{{ user.student.nomor_ponsel }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="fas fa-envelope"></i> E-Mail</span>
+      <h5><strong>{{ user.student.alamat_email }}</strong></h5>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-4">
+      {% if user.student.afiliasi %}
+        <span><i class="fas fa-swimming-pool"></i> Afiliasi</span>
+        <h5><strong>{{ user.student.afiliasi }}</strong></h5>
+      {% endif %}
+    </div>
+    <div class="col-4">
+      <span><i class="fas fa-key"></i> Akses User</span>
+      <h5>
+      {% for group in user.groups.all %}
+        <strong>| {{ group }}</strong>
+      {% endfor %}
+      </h5>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-4">
+      <span><i class="fas fa-user-clock"></i> Pertama Bergabung</span>
+      <h5><strong>{{ user.date_joined }}</strong></h5>
+    </div>
+    <div class="col-4">
+      <span><i class="far fa-clock"></i> Terakhir Login</span>
+      <h5><strong>{{ user.last_login }}</strong></h5>
+    </div>
+  </div>
+  <br>
+
+  <div class="row">
+    <div class="col-8">
+      <span><i class="fas fa-book-reader"></i> Deskripsi Murid</span>
+      <div class="container border">
+        <h5><strong>{{ user.student.deskripsi }}</strong></h5><br>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock content %}
