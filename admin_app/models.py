@@ -73,9 +73,9 @@ class Order(models.Model):
         ordering = ['student']
 
     def __str__(self):
-        if self.student.nama_panggilan:
+        try:
             return f'{self.id}/{self.student.nama_panggilan}'
-        else:
+        except:
             return f'{self.id}/deleted_account'
 
     def is_expired(self):
